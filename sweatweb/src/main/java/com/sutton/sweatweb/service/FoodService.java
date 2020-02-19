@@ -25,9 +25,9 @@ public class FoodService {
 		}
 	}
 	
-	public boolean addFoodLogItem(String user, String date, String foodName, String size, String calories) {
-		
-		Food food = new Food(foodName, size, calories);
+	public boolean addFoodLogItem(String user, String date, int foodID) {
+		// TODO Sutton : Validate user inputs - Except for user. We will do it later
+		Food food = new Food(foodID,null, null, null);
 		
 		FoodLogItem newFoodLogItem = new FoodLogItem(user, date, food);
 		

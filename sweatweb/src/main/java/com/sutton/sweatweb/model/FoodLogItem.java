@@ -1,7 +1,5 @@
 package com.sutton.sweatweb.model;
 
-import java.util.Date;
-
 public class FoodLogItem {
 	
 	private String user;

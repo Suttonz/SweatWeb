@@ -16,9 +16,9 @@ public class MainTest {
 		String calories = "e";
 		
 		String insertQuery = "INSERT INTO userDietLog (USER,LOGDATE,FOODNAME,FOODSIZE,FOODCALORIES)VALUES "
-				+ "('" + user + "','" + logDate + "','" + foodName +"','" + size +"','" + calories +"');";
+				+ "('" + user + "','" + logDate + "','" + foodName +"','" + size +"'," + calories +");";
 		
-		String expected = "INSERT INTO userDietLog (USER,LOGDATE,FOODNAME,FOODSIZE,FOODCALORIES)VALUES ('a','b','c','d','e');";
+		String expected = "INSERT INTO userDietLog (USER,LOGDATE,FOODNAME,FOODSIZE,FOODCALORIES)VALUES ('a','b','c','d',e);";
 		
 		assertEquals(insertQuery, expected);
 	}

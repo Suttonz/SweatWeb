@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+D:\SweatWeb\.metadata\.plugins\org.eclipse.jdt.core
+113558702.index
+2344732806.index

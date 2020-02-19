@@ -1,0 +1,6 @@
+INDEX VERSION 1.4+D:\SweatWeb\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+165629295.index
+4064998980.index
+2344732806.index
+2148293498.index
+4123145374.index

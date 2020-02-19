@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.sutton.sweatweb.model.Food;
@@ -26,10 +25,11 @@ public class FoodDao {
 			ResultSet rs = sqs.executeQuery(searchQuery);
 
 			while (rs.next()) {
+				int foodIDDB = rs.getInt("FOODID");
 				String foodNameDB = rs.getString("FOODNAME");
 				String sizeDB = rs.getString("SIZE");
 				String caloriesDB = rs.getString("CALORIES");
-				Food food = new Food(foodNameDB, sizeDB, caloriesDB);
+				Food food = new Food(foodIDDB,foodNameDB, sizeDB, caloriesDB);
 				foodList.add(food);
 			}
 
@@ -49,11 +49,9 @@ public class FoodDao {
 		conn = ConnectionHelper.getConn();
 		String user = newFoodLogItem.getUser();
 		String logDate = newFoodLogItem.getLogDate();
-		String foodName = newFoodLogItem.getFood().getFoodName();
-		String size = newFoodLogItem.getFood().getSize();
-		String calories = newFoodLogItem.getFood().getCalories();
-		String insertQuery = "INSERT INTO userDietLog (USER,LOGDATE,FOODNAME,FOODSIZE,FOODCALORIES)VALUES "
-				+ "('" + user + "','" + logDate + "','" + foodName +"','" + size +"','" + calories +"' );";
+		int foodID = newFoodLogItem.getFood().getFoodID();
+		String insertQuery = "INSERT INTO userDietLog (USER,DATE,FOODID)VALUES "
+				+ "('" + user + "','" + logDate + "'," + foodID +" );";
 		Statement sqs = conn.createStatement();
 		conn.commit();
 		int returnCode = sqs.executeUpdate(insertQuery);

@@ -1,17 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function performSearch() {
+		
+		// jquery selector
+		var value = $( "#foodname" ).val();
+		
+		
+		// jquery ajax: perform get search and call display
+		$.get("search?foodname=" + value, displayResult);
+	}
+	
+	function displayResult(data, status){
+		
+		// Reset table
+		$("#searchResult tr").remove();
+		
+		// Insert each food search result into table
+		$.each(data, function(index, food) {
+			 
+			  $( "#searchResult" ).append("<tr>"
+					  + "<td>"+food.foodName+"</td>"
+					  + "<td>"+food.size+"</td>"
+					  + "<td>"+food.calories+"</td>"
+					  + "<td><input value='+' type='button' onclick='logFood();'/></td>"
+					  + "</tr>");
+					  
+		});
+		
+	}
+	
+	function logFood() {
+		alert("logFood");
+	}
+	
+</script>
 <meta charset="ISO-8859-1">
 <title>Sweat Web</title>
 </head>
 <body>
 	<form action="search" method="post">
-	<p>Welcome to Sweat web</p>
-		<p>Food:
-		<input name="foodname" type="text">
-		<input type="submit"value="Search"/>
+		<p>Welcome to Sweat web</p>
+		<p>
+			Food: 
+			<input name="foodname" type="text" id="foodname"> 
+			<input onclick="performSearch()" type="button" value="Search" />
 		</p>
 	</form>
+	
+	<div>
+		<table id="searchResult">
+		
+		</table>
+	</div>
+	
 	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+
+
+
 </body>
 </html>

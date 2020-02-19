@@ -14,17 +14,19 @@ import com.sutton.sweatweb.service.FoodService;
 
 public class FoodLogServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private FoodService foodService = new FoodService();
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		String user = request.getParameter("user");
 		String date = request.getParameter("date");
-		String foodName = request.getParameter("foodName");
-		String size = request.getParameter("size");
-		String calories = request.getParameter("calories");
+		int foodID = Integer.parseInt(request.getParameter("foodID"));
 
-		boolean logSuccess = foodService.addFoodLogItem(user, date, foodName, size, calories);
+		boolean logSuccess = foodService.addFoodLogItem(user, date, foodID);
 		PrintWriter out = response.getWriter();
 		if (logSuccess) {
 

@@ -2,9 +2,18 @@ package com.sutton.sweatweb.model;
 
 public class Food {
 	
+	private int foodID;
 	private String foodName;
 	private String size;
 	private String calories;
+	
+	public Food(int foodID, String foodName, String size, String calories) {
+		
+		this.foodID = foodID;
+		this.foodName = foodName;
+		this.size = size;
+		this.calories = calories;
+	}
 	
 	public String getFoodName() {
 		return foodName;
@@ -25,16 +34,18 @@ public class Food {
 		this.calories = calories;
 	}
 	
-	public Food(String foodName, String size, String calories) {
-		
-		this.foodName = foodName;
-		this.size = size;
-		this.calories = calories;
+	public int getFoodID() {
+		return foodID;
 	}
+	public void setFoodID(int foodID) {
+		this.foodID = foodID;
+	}
+	
 	@Override
 	public String toString() {
 		return "Food [foodName=" + foodName + ", size=" + size + ", calories=" + calories + "]";
 	}
+	
 	
 	
 
