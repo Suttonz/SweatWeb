@@ -15,7 +15,7 @@ public class UserDao {
 	 * @param password
 	 * @return returns null if user not found
 	 */
-	public static User getUser(String userName, String password) {
+	public static User getUser(String userName) {
 		
 		User user = null; 
 		

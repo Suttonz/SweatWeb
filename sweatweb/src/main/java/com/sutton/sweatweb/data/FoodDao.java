@@ -12,7 +12,7 @@ import com.sutton.sweatweb.model.FoodLogItem;
 
 public class FoodDao {
 
-	public static List<Food> getFood(String foodName) {
+	public static List<Food> listFood(String foodName) {
 
 		List<Food> foodList = new ArrayList<Food>();
 
@@ -42,21 +42,37 @@ public class FoodDao {
 
 	}
 
-	public static boolean LogFood(FoodLogItem newFoodLogItem)throws SQLException {
+	public static Food getFood(int foodID) {
 
-		Connection conn;
+		
 
-		conn = ConnectionHelper.getConn();
-		String user = newFoodLogItem.getUser();
-		String logDate = newFoodLogItem.getLogDate();
-		int foodID = newFoodLogItem.getFood().getFoodID();
-		String insertQuery = "INSERT INTO userDietLog (USER,DATE,FOODID)VALUES "
-				+ "('" + user + "','" + logDate + "'," + foodID +" );";
-		Statement sqs = conn.createStatement();
-		conn.commit();
-		int returnCode = sqs.executeUpdate(insertQuery);
-		return returnCode != 0;
+		try {
+
+			Connection conn = ConnectionHelper.getConn();
+			String searchQuery = "SELECT * FROM foodList where FOODID = '" + foodID + "'";
+			Statement sqs = conn.createStatement();
+			conn.commit();
+			ResultSet rs = sqs.executeQuery(searchQuery);
+
+			while (rs.next()) {
+				int foodIDDB = rs.getInt("FOODID");
+				String foodNameDB = rs.getString("FOODNAME");
+				String sizeDB = rs.getString("SIZE");
+				String caloriesDB = rs.getString("CALORIES");
+				Food food = new Food(foodIDDB,foodNameDB, sizeDB, caloriesDB);
+				return food;
+			}
+			
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return null;
 
 	}
+	
+	
 
 }

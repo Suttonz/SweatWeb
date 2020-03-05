@@ -17,7 +17,7 @@ public class UserService {
 	
 	public boolean authenticateUser(String userName, String password) {
 		
-		User user = UserDao.getUser(userName, password);
+		User user = UserDao.getUser(userName);
 		
 		return user != null && user.getPassword().equals(password);
 	}

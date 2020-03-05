@@ -1,0 +1,21 @@
+create table userDietLog (
+
+user varchar(25),
+date Date,
+foodID int
+)
+
+CREATE TABLE foodList(
+    foodID int unique,
+    foodName varchar(25),
+    size varchar(25),
+    calories int
+);
+
+Insert into foodlist (foodID,foodName,size,calories) values (1, 'apple', 'Medium', 72);
+Insert into foodlist (foodID,foodName,size,calories) values (2, 'banana', 'Medium', 105);
+Insert into foodlist (foodID,foodName,size,calories) values (3, 'bread', 'One Slice', 66);
+Insert into foodlist (foodID,foodName,size,calories) values (4, 'chicken', '3 Ounces', 142);
+Insert into foodlist (foodID,foodName,size,calories) values (5, 'egg', 'One', 102);
+Insert into foodlist (foodID,foodName,size,calories) values (6, 'milk', '8 Ounces', 122);
+Insert into foodlist (foodID,foodName,size,calories) values (7, 'banana', 'Large',130);

@@ -1,14 +1,29 @@
 package com.sutton.sweatweb.model;
 
 public class FoodLogItem {
-	
+
+
 	private String user;
 	private String logDate;
-	private Food food;
+	private int foodID;
 	
+	public FoodLogItem(String user, String logDate, int foodID) {
+		super();
+		this.user = user;
+		this.logDate = logDate;
+		this.foodID = foodID;
+	}
+	
+	public int getFoodID() {
+		return foodID;
+	}
+	public void setFoodID(int foodID) {
+		this.foodID = foodID;
+	}
 	public String getUser() {
 		return user;
 	}
+
 	public void setUser(String user) {
 		this.user = user;
 	}
@@ -18,21 +33,10 @@ public class FoodLogItem {
 	public void setLogDate(String logDate) {
 		this.logDate = logDate;
 	}
-	public Food getFood() {
-		return food;
-	}
-	public void setFood(Food food) {
-		this.food = food;
-	}
-	public FoodLogItem(String user, String logDate, Food food) {
-		super();
-		this.user = user;
-		this.logDate = logDate;
-		this.food = food;
-	}
+
 	@Override
 	public String toString() {
-		return "FoodLogItem [user=" + user + ", logDate=" + logDate + ", food=" + food + "]";
+		return "FoodLogItem [user=" + user + ", logDate=" + logDate + ", foodID=" + foodID + "]";
 	}
 	
 	

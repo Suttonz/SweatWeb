@@ -1,9 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+
+	// On page load, get the food log
+	refreshFoodLog();
+	
+	function refreshFoodLog() {
+		
+		var date = getDate();
+		
+		$.get("foodLog?date=" + date, displayLogResult);
+	}
+	
+	function displayLogResult() {
+		
+		// Reset table
+		$("#foodLogResult tr").remove();
+		
+		// Insert each food search result into table
+		$.each(data, buildFoodLogResult);
+	}
+	
+	function buildFoodLogResult(index, foodLog) {
+		 
+		  $( "#searchResult" ).append("<tr>"
+				  + "<td>"+foodLog.foodID+"</td>"
+				  + "</tr>");
+	}
+
 	function performSearch() {
 		
 		// jquery selector
@@ -11,30 +37,47 @@
 		
 		
 		// jquery ajax: perform get search and call display
-		$.get("search?foodname=" + value, displayResult);
+		$.get("search?foodname=" + value, displayFoodResult);
 	}
 	
-	function displayResult(data, status){
+	function displayFoodResult(data, status){
 		
 		// Reset table
 		$("#searchResult tr").remove();
 		
 		// Insert each food search result into table
-		$.each(data, function(index, food) {
-			 
-			  $( "#searchResult" ).append("<tr>"
-					  + "<td>"+food.foodName+"</td>"
-					  + "<td>"+food.size+"</td>"
-					  + "<td>"+food.calories+"</td>"
-					  + "<td><input value='+' type='button' onclick='logFood();'/></td>"
-					  + "</tr>");
-					  
-		});
+		$.each(data, buildSearchResult);
 		
 	}
 	
-	function logFood() {
-		alert("logFood");
+	function buildSearchResult(index, food) {
+		 
+		  $( "#searchResult" ).append("<tr>"
+				  + "<td>"+food.foodName+"</td>"
+				  + "<td>"+food.size+"</td>"
+				  + "<td>"+food.calories+"</td>"
+				  + "<td><input value='+' type='button' onclick='logFood("+food.foodID+");'/></td>"
+				  + "</tr>");
+				  
+	}
+	
+	function logFood(foodID) {
+		//aquire browser date
+		var date = getDate();
+
+		var data = { "foodID": foodID, "date" : date };
+		
+		$.post("foodLog",data, refreshFoodLog);
+	}
+	
+	function getDate() {
+		
+		var d = new Date();
+		var year = 1900 + d.getYear();
+		var month = d.getMonth()+1;
+		var day = d.getDate();
+		
+		return year+"-"+month+"-"+day;
 	}
 	
 </script>
@@ -44,6 +87,11 @@
 <body>
 	<form action="search" method="post">
 		<p>Welcome to Sweat web</p>
+		<div>
+			<table id="foodLogResult">
+			
+			</table>
+		</div>
 		<p>
 			Food: 
 			<input name="foodname" type="text" id="foodname"> 
